@@ -24,7 +24,12 @@ pipeline {
       }
       steps {
         sh 'mvn -version'
-        sh 'make lint'
+        sh 'apt-get update'
+        sh 'apt-get install -y make'
+        sh 'make lint' // La imagen utilizada no tiene make.
+        //Podemos añadir make a la imagen (imagen algo más pesada), ejecutar directamente o crear una imagen
+        //mvn -q -DskipTests=true test. Añadimos make para aprovechar el Makefile ya hecho
+
       }
     }
   }
