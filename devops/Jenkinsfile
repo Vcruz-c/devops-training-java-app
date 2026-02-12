@@ -29,7 +29,9 @@ pipeline {
         sh 'make lint' // La imagen utilizada no tiene make.
         //Podemos añadir make a la imagen (imagen algo más pesada), ejecutar directamente o crear una imagen
         //mvn -q -DskipTests=true test. Añadimos make para aprovechar el Makefile ya hecho
-
+        //Los make son parte de un archivo llamado Makefile que permite definir instrucciones
+        //y acortar algo que puede ser más largo, por ejemplo lint = mvn -q -DskipTests=true test
+        sh 'make test'
       }
     }
   }
