@@ -40,6 +40,8 @@ pipeline {
     stage("Build"){
       steps{
         sh 'docker version'
+        //Ahora vamos a construir imagen docker a partir de Dockerfile 
+        sh 'docker build -t java-app:1.0 -f devops/Dockerfile .'
       }
     }
   }
