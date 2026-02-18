@@ -35,12 +35,25 @@ pipeline {
       }
     }
     /**
-    *Stage de build.
+    * STage intermedio para empaquetar la aplicación
+    */
+    stage("package"){
+      agent {
+        docker {
+          image 'maven:3.8.6-openjdk-11-slim'
+        }
+      }
+      steps{
+        sh 'mvn -q package -DskipTests'
+      }
+    }
+
+    /**
+    *stage de build donde se construye la imagen docker a partir del Dockerfile.
     */
     stage("Build"){
       steps{
         sh 'docker version'
-        sh 'mvn -q package -DskipTests'
         //Ahora vamos a construir imagen docker a partir de Dockerfile 
         sh 'docker build -t java-app:1.0 -f devops/Dockerfile .'
       }
