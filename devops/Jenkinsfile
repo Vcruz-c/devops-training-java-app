@@ -58,5 +58,16 @@ pipeline {
         sh 'docker build -t java-app:1.0 --build-arg VERSION=0.0.1-SNAPSHOT -f devops/Dockerfile .'
       }
     }
+
+    /**
+    *stage de despliegue, donde se lanza el contenedor a partir de la imagen construida en el stage anterior.
+    * Vamos a usar el mismo agent de jenkins (no podemos nada de agent aqui y usará el agent del pipeline)
+    */
+    stage("Deploy"){
+      steps{
+        //Ahora vamos a lanzar el contenedor a partir de la imagen construida en el stage anterior.
+        sh 'docker '
+      }
+    }
   }
 }
