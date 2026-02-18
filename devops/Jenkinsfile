@@ -34,5 +34,13 @@ pipeline {
         sh 'make test'
       }
     }
+    /**
+    *Stage de build.
+    */
+    stage("Build"){
+      steps{
+        sh 'docker version'
+      }
+    }
   }
 }
