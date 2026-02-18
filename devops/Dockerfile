@@ -1,7 +1,7 @@
 #
 # Build stage
 #
-FROM maven:3.8.6-eclipse-temurin:11 as build
+FROM maven:3.8.6-eclipse-temurin-11 as build
 ARG VERSION=0.0.1-SNAPSHOT
 
 COPY ./src /home/app/src
