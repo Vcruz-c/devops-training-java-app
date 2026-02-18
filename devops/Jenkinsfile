@@ -40,6 +40,7 @@ pipeline {
     stage("Build"){
       steps{
         sh 'docker version'
+        sh 'mvn -q package -DskipTests'
         //Ahora vamos a construir imagen docker a partir de Dockerfile 
         sh 'docker build -t java-app:1.0 -f devops/Dockerfile .'
       }
