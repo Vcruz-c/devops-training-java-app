@@ -74,12 +74,20 @@ pipeline {
     */
     stage("Prueba end to end"){
       steps{
-        sh 'sleep 15' // dar tiempo a que arranque
-        sh 'docker logs java_app' // ver qué está pasando
+        sh 'sleep 10'
         sh '''#!/bin/bash
-        APP_IP=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' java_app)
-        echo "IP de java_app: $APP_IP"
-        curl -f -u user:test http://$APP_IP:8080/hello
+        for i in {1..10}; do
+          echo "Intento $i de conexión al endpoint..."
+          if docker run --rm --network container:java_app curlimages/curl \
+              curl -f -u user:test http://localhost:8080/hello; then
+            echo "Endpoint funcionando correctamente"
+            exit 0
+          fi
+          echo "Esperando a que arranque la app..."
+          sleep 5
+        done
+        echo "ERROR: la aplicación no responde después de varios intentos"
+        exit 1
         '''
       }
     }
