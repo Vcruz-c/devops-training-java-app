@@ -76,7 +76,7 @@ pipeline {
       steps{
         sh 'sleep 10' //Esperamos 10 segundos a que el contenedor se inicie correctamente
         //Ahora vamos a probar que la aplicación se ha desplegado correctamente haciendo una petición HTTP al endpoint /hello
-        sh 'curl -s http://localhost:8080/hello'
+        sh 'curl -s http://localhost:8084/hello'
       }
     }
     /**
