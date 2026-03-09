@@ -74,19 +74,16 @@ pipeline {
     */
     stage("Prueba end to end"){
       steps{
-        sh '''
+        sh '''#!/bin/bash
         for i in {1..10}; do
           echo "Intento $i de conexión al endpoint..."
-
           if curl -f http://localhost:8080/hello; then
             echo "Endpoint funcionando correctamente"
             exit 0
           fi
-
           echo "Esperando a que arranque la app..."
           sleep 5
         done
-
         echo "ERROR: la aplicación no responde después de varios intentos"
         exit 1
         '''
