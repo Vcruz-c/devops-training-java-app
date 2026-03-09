@@ -19,6 +19,8 @@ services:
     container_name: java_app
     ports:
       - 8084:8080
+    environment:
+      - SPRING_SECURITY_USER_PASSWORD=test
 
   sonarqube:
     image: sonarqube:9.9.0-community
