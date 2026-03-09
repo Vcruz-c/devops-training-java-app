@@ -69,5 +69,23 @@ pipeline {
         sh 'docker compose -f docker-compose.yml up -d'
       }
     }
+    /**
+    *stage de prueba end to end, donde se hace una petición HTTP al endpoint /hello para comprobar que la aplicación se ha desplegado correctamente.
+    */
+    stage("Prueba end to end"){
+      steps{
+        sh 'sleep 10' //Esperamos 10 segundos a que el contenedor se inicie correctamente
+        //Ahora vamos a probar que la aplicación se ha desplegado correctamente haciendo una petición HTTP al endpoint /hello
+        sh 'curl -s http://localhost:8080/hello'
+      }
+    }
+    /**
+    *stage de limpieza, donde se detiene y elimina el contenedor y la imagen docker para dejar el entorno limpio
+    */
+    stage("Cleanup"){
+      steps{
+        sh 'docker compose -f docker-compose.yml down --volumes'
+      }
+    }
   }
 }
