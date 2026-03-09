@@ -78,7 +78,7 @@ pipeline {
         for i in {1..10}; do
           echo "Intento $i de conexión al endpoint..."
 
-          if curl -f http://localhost:8084/hello; then
+          if curl -f http://localhost:8080/hello; then
             echo "Endpoint funcionando correctamente"
             exit 0
           fi
