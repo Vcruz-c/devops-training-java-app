@@ -54,6 +54,12 @@ jobs:
       - name: Test
         run: docker run --rm -v $(pwd):/workspace -w /workspace java-ci-image make test
 
+      # Construye la imagen Docker final de la aplicación
+      # Equivalente al stage "Build" del Jenkinsfile
+      # --build-arg pasa la versión como argumento al Dockerfile
+      - name: Build app image
+        run: docker build -t scalian_training-java-hello-world:0.0.2 --build-arg VERSION=0.0.1-SNAPSHOT -f devops/Dockerfile .
+
   # Job de CD (Despliegue Continuo): deploy + e2e + cleanup
   # Solo se ejecuta si:
   #   - Se lanzó manualmente con RUN_CD=true, O
